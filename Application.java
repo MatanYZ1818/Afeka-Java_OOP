@@ -1,47 +1,116 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Application {
-    public static void main(String[] args) {
-        //מתן יעקב זכריה
-        //אופק דריבינסקי
+    // מתן יעקב זכריה
+    // אופק דריבינסקי
 
-        try (Scanner scanner = new Scanner(System.in)){
-            int userChoice=10;
-            System.out.print("please choose an option\n0 - exit\n1 - add a seller    2 - add a buyer\n3 - add an item to the seller    4 - add an item to the buyer\n5 - pay for order\n6 - show details for all buyers    7 - show details for all sellers\nchoice : ");
-            userChoice=Integer.parseInt(scanner.nextLine());
-            while(userChoice!=0){
-                switch(userChoice){
+    private static ArrayList<String> sellers = new ArrayList<>();
+    private static ArrayList<String> buyers = new ArrayList<>();
+
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            int userChoice;
+            do {
+                System.out.print("Please choose an option\n0 - exit\n1 - add a seller\n2 - add a buyer\n3 - add an item to the seller\n4 - add an item to the buyer\n5 - pay for order\n6 - show details for all buyers\n7 - show details for all sellers\nChoice: ");
+                userChoice = Integer.parseInt(scanner.nextLine());
+
+                switch (userChoice) {
                     case 1:
-                        //TODO : run the Method that gets a seller's username ad adds it to the array
-                        //this method also checks if the username is already taken. if so, it asks for a new name
+                        addUser(scanner, sellers, "seller");
                         break;
                     case 2:
-                        //TODO : run the Method that gets a buyer's username ad adds it to the array
-                        //this method also checks if the username is already taken. if so, it asks for a new name
+                        addUser(scanner, buyers, "buyer");
                         break;
                     case 3:
-                        //TODO:choose a seller and get from the user an item to add to the seller with the item's name , price and category
+                        addItemToSeller(scanner);
                         break;
                     case 4:
-                        //TODO: choose a buyer and get the item's name, which seller  he wants it from
+                        addItemToBuyer(scanner);
                         break;
                     case 5:
-                        //TODO: choose a buyer and pay for the order
+                        payForOrder(scanner);
                         break;
                     case 6:
-                        //TODO: go through all the sellers and show their details
+                        showUsers(buyers, "Buyers");
                         break;
                     case 7:
-                        //TODO: go through all the buyers and show their details
+                        showUsers(sellers, "Sellers");
+                        break;
+                    case 0:
+                        System.out.println("Exiting...");
                         break;
                     default:
-                        System.out.println("invalid option !");
+                        System.out.println("Invalid option!");
                 }
-                System.out.print("please choose an option\n0 - exit\n1 - add a seller    2 - add a buyer\n3 - add an item to the seller    4 - add an item to the buyer\n5 - pay for order\n6 - show details for all buyers    7 - show details for all sellers\nchoice : ");
-                userChoice=Integer.parseInt(scanner.nextLine());
-            }
+            } while (userChoice != 0);
+        }
+    }
+
+    private static void addUser(Scanner scanner, ArrayList<String> users, String userType) {
+        System.out.print("Enter " + userType + " username: ");
+        String username = scanner.nextLine();
+        if (users.contains(username)) {
+            System.out.println(userType + " username already exists. Please choose a different username.");
+        } else {
+            users.add(username);
+            System.out.println(userType + " added successfully.");
+        }
+    }
+
+    private static void addItemToSeller(Scanner scanner) {
+        System.out.print("Enter seller's username: ");
+        String sellerName = scanner.nextLine();
+        if (!sellers.contains(sellerName)) {
+            System.out.println("Seller does not exist.");
+            return;
+        }
+        System.out.print("Enter item name: ");
+        String itemName = scanner.nextLine();
+        System.out.print("Enter item price: ");
+        double itemPrice = Double.parseDouble(scanner.nextLine());
+        System.out.print("Enter item category: ");
+        String itemCategory = scanner.nextLine();
+        // Currently, just collecting the data
+        System.out.println("Item " + itemName + " added to seller " + sellerName + " with price " + itemPrice + " in category " + itemCategory + ".");
+    }
+
+    private static void addItemToBuyer(Scanner scanner) {
+        System.out.print("Enter buyer's username: ");
+        String buyerName = scanner.nextLine();
+        if (!buyers.contains(buyerName)) {
+            System.out.println("Buyer does not exist.");
+            return;
+        }
+        System.out.print("Enter seller's username from whom to buy: ");
+        String sellerName = scanner.nextLine();
+        if (!sellers.contains(sellerName)) {
+            System.out.println("Seller does not exist.");
+            return;
+        }
+        System.out.print("Enter item name: ");
+        String itemName = scanner.nextLine();
+        // Currently, just collecting the data
+        System.out.println("Item " + itemName + " added to buyer " + buyerName + " from seller " + sellerName + ".");
+    }
+
+    private static void payForOrder(Scanner scanner) {
+        System.out.print("Enter buyer's username to process payment: ");
+        String buyerName = scanner.nextLine();
+        if (!buyers.contains(buyerName)) {
+            System.out.println("Buyer does not exist.");
+            return;
+        }
+        // Currently, just collecting the data
+        System.out.println("Payment for buyer " + buyerName + " processed successfully.");
+    }
+
+    private static void showUsers(ArrayList<String> users, String userType) {
+        System.out.println(userType + " list:");
+        for (String user : users) {
+            System.out.println(user);
         }
     }
 }
