@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Application {
-    // אופק דריבינסקי
-    // מתן יעקב זכריה
+    //כיתה של איל איזנשטיין
+    // אופק דריבינסקי - 322888264
+    // מתן יעקב זכריה - 211824651
 
     private static ArrayList<String> sellers = new ArrayList<>();
     private static ArrayList<String> buyers = new ArrayList<>();
