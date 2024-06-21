@@ -70,4 +70,9 @@ public class UserManager {
         }
         return null;
     }
+
+    public void addItemToBuyer(Scanner scanner){
+        System.out.println("please choose a buyer from the buyers list");
+        System.out.println(sellers);
+    }
 }

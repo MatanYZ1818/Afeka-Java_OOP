@@ -6,7 +6,7 @@ public class SystemManager {
     // כיתה של איל איזנשטיין
     // אופק דריבינסקי - 322888264
     // מתן יעקב זכריה - 211824651
-
+    
     public static void main(String[] args) {
         UserManager userManager = new UserManager();
         ItemManager itemManager = new ItemManager();
