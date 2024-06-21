@@ -29,7 +29,7 @@ public class SystemManager {
                         itemManager.addItemToSeller(scanner, userManager);
                         break;
                     case 4:
-                        // Implement the logic for adding an item to the buyer if required
+                        itemManager.addItemToBuyer(scanner, userManager);
                         break;
                     case 5:
                         paymentManager.payForOrder(scanner, userManager);

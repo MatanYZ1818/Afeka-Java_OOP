@@ -18,4 +18,11 @@ public class ItemManager {
         // Currently, just collecting the data
         System.out.println("Item " + itemName + " added to seller " + sellerName + " with price " + itemPrice + ".");
     }
+
+    public void addItemToBuyer(Scanner scanner,UserManager userManager){
+        System.out.println("please choose a buyer from the buyers list");
+        System.out.println(userManager.getSellers());
+        String sellerName = scanner.nextLine();
+
+    }
 }
