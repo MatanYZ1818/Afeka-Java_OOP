@@ -39,12 +39,12 @@ public class UserManager {
         System.out.println(userType + " list:");
         ArrayList<? extends User> users = userType.equalsIgnoreCase("buyer") ? buyers : sellers;
         for (User user : users) {
-            System.out.println(user.getUsername());
+            System.out.println(user.toString());
         }
     }
 
     public boolean userExists(String username, String userType) {
-        ArrayList<? extends User> users = userType.equalsIgnoreCase("buyer") ? buyers : sellers;
+        ArrayList<? extends User> users = userType.equalsIgnoreCase("buyers") ? buyers : sellers;
         for (User user : users) {
             if (user.getUsername().equals(username)) {
                 return true;
@@ -75,5 +75,20 @@ public class UserManager {
     }
     public ArrayList<Seller> getSellers(){
         return sellers;
+    }
+
+    public ArrayList<String> getBuyersNames() {
+        ArrayList<String> buyersNames = new ArrayList<>();
+        for (Buyer buyer : buyers) {
+            buyersNames.add(buyer.getUsername());
+        }
+        return buyersNames;
+    }
+    public ArrayList<String> getSellersNames() {
+        ArrayList<String> sellersNames = new ArrayList<>();
+        for (Seller seller : sellers) {
+            sellersNames.add(seller.getUsername());
+        }
+        return sellersNames;
     }
 }

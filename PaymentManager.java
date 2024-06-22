@@ -11,7 +11,12 @@ public class PaymentManager {
             System.out.println("Buyer does not exist.");
             return;
         }
-        // Currently, just collecting the data
+        double finalPrice=0;
+        for (Item item:buyer.getCurrentCart().getItemsCart()){
+            finalPrice+=item.getPrice();
+        }
+        System.out.println("Your final price is $"+finalPrice);
+        buyer.purchaseCart();
         System.out.println("Payment for buyer " + buyerName + " processed successfully.");
     }
 }

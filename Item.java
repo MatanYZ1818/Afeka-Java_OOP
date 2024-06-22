@@ -16,6 +16,11 @@ public class Item {
         this.price = 0;
         this.itemName = "";
     }
+    public Item(Item item){
+        this.itemName = item.getItemName();
+        this.seller = item.getSeller();
+        this.price = item.getPrice();
+    }
     //getters and setters
     public String getItemName() {
         return itemName;
@@ -37,9 +42,11 @@ public class Item {
     }
 
     //methods
-
+    public String basicInfo(){
+        return "item's name=" + itemName + ", price=" + price;
+    }
     @Override
     public String toString() {
-        return "Item{" + "itemName=" + itemName + ", seller=" + seller.getUsername() + ", price=" + price + '}';
+        return "itemName=" + itemName + ", seller=" + seller.getUsername() + ", price=" + price;
     }
 }

@@ -31,31 +31,26 @@ public class Cart {
         this.cartSize = itemsCart.length;
         this.actualAmount = 0;
     }
+
     // getter and setters
     public User getUsersCart() {
         return usersCart;
     }
-
     public void setUsersCart(User usersCart) {
         this.usersCart = usersCart;
     }
-
     public Item[] getItemsCart() {
         return itemsCart;
     }
-
     public void setItemsCart(Item[] itemsCart) {
         this.itemsCart = itemsCart;
     }
-
     public Date getCartDate() {
         return cartDate;
     }
-
     public void setCartDate(Date cartDate) {
         this.cartDate = cartDate;
     }
-
     public int getCartSize() {
         return cartSize;
     }
@@ -65,6 +60,7 @@ public class Cart {
     public int getActualAmount() {
         return actualAmount;
     }
+
     //methods
     public void addItem(Item item) {
         if(actualAmount < itemsCart.length){
@@ -92,14 +88,18 @@ public class Cart {
             }
         }
     }
-
     @Override
-    public java.lang.String toString() {
+    public String toString() {
+        String str="[";
         for(int i = 0; i < itemsCart.length; i++){
             if(itemsCart[i]!=null){
-                return itemsCart[i].toString();
+                str+= itemsCart[i].toString();
+                if(i!=itemsCart.length-1){
+                    str+=", ";
+                }
             }
         }
-        return "";
+        str+="]";
+        return str;
     }
 }
