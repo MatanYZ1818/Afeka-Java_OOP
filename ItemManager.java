@@ -1,57 +1,123 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ItemManager {
+    private ArrayList<Seller> sellers = new ArrayList<>();
+
     public void addItemToSeller(Scanner scanner, UserManager userManager) {
-        System.out.print("Enter chosen seller's username: ");
-        String sellerName = scanner.nextLine();
-        Seller chosenSeller = userManager.getSeller(sellerName);
-        if (chosenSeller == null) {
-            System.out.println("Seller does not exist.");
+        System.out.print("Enter seller username: ");
+        String sellerUsername = scanner.nextLine();
+        Seller seller = userManager.getSeller(sellerUsername);
+
+        if (seller == null) {
+            System.out.println("Seller not found.");
             return;
         }
+
         System.out.print("Enter item name: ");
         String itemName = scanner.nextLine();
         System.out.print("Enter item price: ");
         double itemPrice = Double.parseDouble(scanner.nextLine());
-        Item sellersItem=new Item(itemName,chosenSeller,itemPrice);
-        chosenSeller.addSellerItem(sellersItem);
-        System.out.println("Item " + itemName + " added to seller " + sellerName + " with price " + itemPrice + ".");
+        System.out.print("Enter item category: ");
+        String itemCategory = scanner.nextLine();
+        System.out.print("Enter item packaging type: ");
+        String packagingType = scanner.nextLine();
 
+        Item newItem = new Item(itemName, seller, itemPrice, itemCategory);
+        seller.addSellerItem(newItem, packagingType);
+        System.out.println("Item added successfully.");
     }
 
-    public void addItemToBuyer(Scanner scanner,UserManager userManager){
-        if(userManager.getBuyers().isEmpty()||userManager.getSellers().isEmpty()){
-            System.out.println("Invalid request. You do not have any buyers or seller");
+    public void addItemToBuyer(Scanner scanner, UserManager userManager) {
+        System.out.print("Enter buyer username: ");
+        String buyerUsername = scanner.nextLine();
+        Buyer buyer = userManager.getBuyer(buyerUsername);
+
+        if (buyer == null) {
+            System.out.println("Buyer not found.");
             return;
         }
-        System.out.println("please choose a buyer from the buyers list");
-        System.out.println(userManager.getBuyersNames());
-        System.out.print("Enter chosen buyer's username: ");
-        String buyerName = scanner.nextLine();
-        while(buyerName.isEmpty() || !(userManager.userExists(buyerName,"buyers"))) {
-            System.out.print("Enter a valid buyer's username: ");
-            buyerName = scanner.nextLine();
+
+        System.out.print("Enter item name: ");
+        String itemName = scanner.nextLine();
+        Item sellerItem = null;
+
+        for (Seller seller : sellers) {
+            if (seller.hasItem(itemName)) {
+                sellerItem = seller.getItem(itemName);
+                break;
+            }
         }
-        System.out.println("please choose a seller from the sellers list");
-        System.out.println(userManager.getSellersNames());
-        System.out.print("Enter chosen seller's username: ");
-        String sellerName = scanner.nextLine();
-        while(sellerName.isEmpty() || !(userManager.userExists(sellerName,"seller"))) {
-            System.out.print("Enter a valid seller's username: ");
-            sellerName = scanner.nextLine();
+
+        if (sellerItem == null) {
+            System.out.println("Item not found.");
+            return;
         }
-        Buyer chosenBuyer = userManager.getBuyer(buyerName);
-        Seller chosenSeller = userManager.getSeller(sellerName);
-        System.out.println(chosenSeller.getUsername()+" is selling:\n"+chosenSeller.getSellerItemsStr());
-        System.out.print("please pick an item from the seller's list: ");
-        String buyerItemName = scanner.nextLine();
-        while(buyerItemName.isEmpty()||!(chosenSeller.hasItem(buyerItemName))) {
-            System.out.print("Enter a valid item's name: ");
-            buyerItemName = scanner.nextLine();
+
+        buyer.addToCart(sellerItem);
+        System.out.println("Item added to buyer's cart.");
+    }
+
+    public void displayItemsByCategory(Scanner scanner) {
+        System.out.print("Enter category name: ");
+        String category = scanner.nextLine().trim().toLowerCase();
+        System.out.println("Items from category '" + category + "':");
+
+        for (Seller seller : sellers) {
+            for (Item item : seller.getSellerItems()) {
+                if (item.getCategory().equalsIgnoreCase(category)) {
+                    System.out.println(item.toString());
+                }
+            }
         }
-        Item chosenItem=new Item(chosenSeller.getItem(buyerItemName));
-        chosenBuyer.addToCart(chosenItem);
+    }
+
+    public void displayItemsBySeller(Scanner scanner, UserManager userManager) {
+        System.out.print("Enter seller username: ");
+        String sellerUsername = scanner.nextLine();
+        Seller seller = userManager.getSeller(sellerUsername);
+
+        if (seller == null) {
+            System.out.println("Seller not found.");
+            return;
+        }
+
+        System.out.println("Items from seller '" + seller.getUsername() + "':");
+        for (Item item : seller.getSellerItems()) {
+            if (item != null) {
+                System.out.println(item.toString());
+            }
+        }
+    }
+
+    public void displayItemsBySellerCategory(Scanner scanner, UserManager userManager) {
+        System.out.print("Enter seller username: ");
+        String sellerUsername = scanner.nextLine();
+        Seller seller = userManager.getSeller(sellerUsername);
+
+        if (seller == null) {
+            System.out.println("Seller not found.");
+            return;
+        }
+
+        System.out.print("Enter category name: ");
+        String category = scanner.nextLine().trim().toLowerCase();
+
+        System.out.println("Items from seller '" + seller.getUsername() + "' in category '" + category + "':");
+        for (Item item : seller.getSellerItems()) {
+            if (item != null && item.getCategory().equalsIgnoreCase(category)) {
+                System.out.println(item.toString());
+            }
+        }
+    }
+
+    public ArrayList<Seller> getSellers() {
+        return sellers;
+    }
+
+    public void setSellers(ArrayList<Seller> sellers) {
+        this.sellers = sellers;
     }
 }

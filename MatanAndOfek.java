@@ -15,7 +15,7 @@ public class MatanAndOfek {
         try (Scanner scanner = new Scanner(System.in)) {
             int userChoice;
             do {
-                System.out.print("Please choose an option\n0 - exit\n1 - add a seller\n2 - add a buyer\n3 - add an item to the seller\n4 - add an item to the buyer\n5 - pay for order\n6 - show details for all buyers\n7 - show details for all sellers\nChoice: ");
+                System.out.print("Please choose an option\n0 - exit\n1 - add a seller\n2 - add a buyer\n3 - add an item to the seller\n4 - add an item to the buyer\n5 - pay for order\n6 - show details for all buyers\n7 - show details for all sellers\n8 - Display Items by Category\nChoice: ");
                 userChoice = Integer.parseInt(scanner.nextLine());
 
                 switch (userChoice) {
@@ -39,6 +39,9 @@ public class MatanAndOfek {
                         break;
                     case 7:
                         userManager.showUsers("Seller");
+                        break;
+                    case 8:
+                        itemManager.displayItemsByCategory(scanner);
                         break;
                     case 0:
                         System.out.println("Exiting...");

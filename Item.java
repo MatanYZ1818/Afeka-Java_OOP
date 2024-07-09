@@ -1,52 +1,68 @@
 package project;
 
 public class Item {
-    //properties
+    private static int nextSerialNumber = 1;
+    
+    // Properties
+    private int serialNumber;
     private String itemName;
     private Seller seller;
     private double price;
-    //buiders
-    public Item(String itemName, Seller sellerName, double price) {
+    private String category;
+
+    // Constructors
+    public Item(String itemName, Seller seller, double price, String category) {
         this.itemName = itemName;
-        this.seller = sellerName;
+        this.seller = seller;
         this.price = price;
+        this.category = category;
+        this.serialNumber = nextSerialNumber++;
     }
-    public Item(){
-        this.seller = null;
-        this.price = 0;
-        this.itemName = "";
+
+    // Getters and Setters
+    public int getSerialNumber() {
+        return serialNumber;
     }
-    public Item(Item item){
-        this.itemName = item.getItemName();
-        this.seller = item.getSeller();
-        this.price = item.getPrice();
-    }
-    //getters and setters
+
     public String getItemName() {
         return itemName;
     }
+
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
+
     public Seller getSeller() {
         return seller;
     }
+
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
+
     public double getPrice() {
         return price;
     }
+
     public void setPrice(double price) {
         this.price = price;
     }
 
-    //methods
-    public String basicInfo(){
-        return "item's name=" + itemName + ", price=" + price;
+    public String getCategory() {
+        return category;
     }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    // Methods
+    public String basicInfo() {
+        return "Item: " + itemName + ", Price: $" + price + ", Category: " + category;
+    }
+
     @Override
     public String toString() {
-        return "itemName=" + itemName + ", seller=" + seller.getUsername() + ", price=" + price;
+        return "Item: " + itemName + ", Price: $" + price + ", Category: " + category + ", Serial Number: " + serialNumber;
     }
 }
