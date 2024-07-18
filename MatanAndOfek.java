@@ -13,43 +13,56 @@ public class MatanAndOfek {
         PaymentManager paymentManager = new PaymentManager();
 
         try (Scanner scanner = new Scanner(System.in)) {
-            int userChoice;
+            String userChoice;
             do {
-                System.out.print("Please choose an option\n0 - exit\n1 - add a seller\n2 - add a buyer\n3 - add an item to the seller\n4 - add an item to the buyer\n5 - pay for order\n6 - show details for all buyers\n7 - show details for all sellers\n8 - Display Items by Category\nChoice: ");
-                userChoice = Integer.parseInt(scanner.nextLine());
+                userChoice="";
+                try{
+                    System.out.print("Please choose an option\n0 - exit\n"+
+                                                                "1 - add a seller\t\t\t\t\t2 - add a buyer\t\t\t\t\t3 - add an item to the seller\n" +
+                                                                "4 - add an item to the buyer\t\t5 - pay for order\t\t\t\t6 - show details for all buyers\n" +
+                                                                "7 - show details for all sellers\t8 - Display Items by Category\t9 - reuse old cart as template \n" +
+                                                                "Choice: ");
+                    userChoice = scanner.nextLine();
 
-                switch (userChoice) {
-                    case 1:
-                        userManager.addSeller(scanner);
-                        break;
-                    case 2:
-                        userManager.addBuyer(scanner);
-                        break;
-                    case 3:
-                        itemManager.addItemToSeller(scanner, userManager);
-                        break;
-                    case 4:
-                        itemManager.addItemToBuyer(scanner, userManager);
-                        break;
-                    case 5:
-                        paymentManager.payForOrder(scanner, userManager);
-                        break;
-                    case 6:
-                        userManager.showUsers("Buyer");
-                        break;
-                    case 7:
-                        userManager.showUsers("Seller");
-                        break;
-                    case 8:
-                        itemManager.displayItemsByCategory(scanner);
-                        break;
-                    case 0:
-                        System.out.println("Exiting...");
-                        break;
-                    default:
-                        System.out.println("Invalid option!");
+                    switch (userChoice) {
+                        case "1":
+                            userManager.addSeller(scanner);
+                            break;
+                        case "2":
+                            userManager.addBuyer(scanner);
+                            break;
+                        case "3":
+                            itemManager.addItemToSeller(scanner, userManager);
+                            break;
+                        case "4":
+                            itemManager.addItemToBuyer(scanner, userManager);
+                            break;
+                        case "5":
+                            paymentManager.payForOrder(scanner, userManager);
+                            break;
+                        case "6":
+                            userManager.showUsers("buyer");
+                            break;
+                        case "7":
+                            userManager.showUsers("seller");
+                            break;
+                        case "8":
+                            itemManager.displayItemsByCategory(scanner, userManager);
+                            break;
+                        case "9":
+                            userManager.useOldCart(scanner);
+                            break;
+                        case "0":
+                            System.out.println("Exiting...");
+                            break;
+                        default:
+                            System.out.println("Invalid option");
+                    }
+                } catch (Exception e){
+                    System.out.println(e.getMessage());
                 }
-            } while (userChoice != 0);
+                scanner.reset();
+            } while (!userChoice.equals("0"));
         }
     }
 }

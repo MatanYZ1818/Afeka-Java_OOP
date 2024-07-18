@@ -23,35 +23,27 @@ public class Item {
     public int getSerialNumber() {
         return serialNumber;
     }
-
     public String getItemName() {
         return itemName;
     }
-
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
-
     public Seller getSeller() {
         return seller;
     }
-
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
-
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
-
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }

@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Cart {
     //properties
-    User usersCart;
-    Item[] itemsCart;
-    Date cartDate;
-    int cartSize;
-    int actualAmount;
+    private User usersCart;
+    private Item[] itemsCart;
+    private Date cartDate;
+    private int cartSize;
+    private int actualAmount;
     //builders
     public Cart(User usersCart, Item[] itemsCart) {
         this.usersCart = usersCart;
@@ -90,7 +90,7 @@ public class Cart {
     }
     @Override
     public String toString() {
-        String str="[";
+        String str="\n[";
         for(int i = 0; i < itemsCart.length; i++){
             if(itemsCart[i]!=null){
                 str+= itemsCart[i].toString();

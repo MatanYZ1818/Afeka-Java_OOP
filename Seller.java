@@ -1,7 +1,5 @@
 package project;
 
-import java.util.Arrays;
-
 public class Seller extends User {
     // Properties
     private Item[] sellerItems;
@@ -20,11 +18,9 @@ public class Seller extends User {
     public Item[] getSellerItems() {
         return sellerItems;
     }
-
     public int getSellerItemsSize() {
         return sellerItemsSize;
     }
-
     public int getActualAmount() {
         return actualAmount;
     }
@@ -46,7 +42,6 @@ public class Seller extends User {
         }
         actualAmount++;
     }
-
     public void removeSellerItem(Item item) {
         for (int i = 0; i < sellerItems.length; i++) {
             if (sellerItems[i] == item) {
@@ -55,7 +50,6 @@ public class Seller extends User {
             }
         }
     }
-
     public String getSellerItemsStr() {
         StringBuilder str = new StringBuilder("\n");
         for (int i = 0; i < sellerItemsSize; i++) {
@@ -68,11 +62,9 @@ public class Seller extends User {
         }
         return str.toString();
     }
-
     public String getBasicInfo() {
         return "Seller's name: " + getUsername();
     }
-
     public boolean hasItem(String itemName) {
         for (int i = 0; i < sellerItems.length; i++) {
             if (sellerItems[i] != null && sellerItems[i].getItemName().equals(itemName)) {

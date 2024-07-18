@@ -6,10 +6,10 @@ import java.util.Date;
 public class Buyer extends User {
     //properties
     private String address;
-    Cart currentCart;
-    Cart[] cartHistory;
-    int cartHistorySize;
-    int actualHistorySize;
+    private Cart currentCart;
+    private Cart[] cartHistory;
+    private int cartHistorySize;
+    private int actualHistorySize;
 
     //builders
     public Buyer(String username, String password, String address) {
@@ -99,16 +99,25 @@ public class Buyer extends User {
     }
     public void displayCartHistory(){
         for(int i=0; i<cartHistorySize; i++){
+            System.out.println();
             if(cartHistory[i]!=null){
-                System.out.println(cartHistory[i].toString());
+                System.out.println((i+1)+cartHistory[i].toString());
             }
         }
+    }
+    public String getCartHistoryAsString(){
+        String cartHistoryString = "";
+        for(int i=0; i<cartHistorySize; i++){
+            if(cartHistory[i]!=null){
+                cartHistoryString += "\n"+(i+1)+cartHistory[i].toString();
+            }
+        }
+        return cartHistoryString;
     }
     public String getBasicInfo(){
         return "buyer's name: "+getUsername()+"\n current cart"+ currentCart.toString()+"\n cart history: "+ Arrays.toString(cartHistory) +"\n";
     }
-    @Override
-    public String toString() {
-        return "username: " + getUsername() + "\n password: " + getPassword() + "\n address: " + getAddress() + "\n current cart = " + getCurrentCart() + "\n cart history = " + Arrays.toString(getCartHistory()) + "\n cart history size = " + getCartHistorySize() + "\n";
+    @Override public String toString() {
+        return "username: " + getUsername() + "\n password: " + getPassword() + "\n address: " + getAddress() + "\n current cart = " + getCurrentCart() + "\n cart history = " + getCartHistoryAsString() + "\n cart history size = " + getActualHistorySize() + "\n";
     }
 }
