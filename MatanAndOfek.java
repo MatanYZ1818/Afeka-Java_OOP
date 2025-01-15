@@ -21,6 +21,9 @@ public class MatanAndOfek {
                                                                 "1 - add a seller\t\t\t\t\t2 - add a buyer\t\t\t\t\t3 - add an item to the seller\n" +
                                                                 "4 - add an item to the buyer\t\t5 - pay for order\t\t\t\t6 - show details for all buyers\n" +
                                                                 "7 - show details for all sellers\t8 - Display Items by Category\t9 - reuse old cart as template \n" +
+                                                                "69 - populate Users array UNLIKE THE ORIGINAL PROJECT,THIS ALLOWS DUPLICATES!\n"+
+                                                                "99 - show list of names\t\t\t\t100 - show names after hashing\t"+"101 - count strings\n"+
+                                                                "102 - turn to Arraylist\n"+
                                                                 "Choice: ");
                     userChoice = scanner.nextLine();
 
@@ -54,6 +57,24 @@ public class MatanAndOfek {
                             break;
                         case "0":
                             System.out.println("Exiting...");
+                            break;
+                        case "69":
+                            userManager.populate();
+                            break;
+                        case "99":
+                            userManager.printNames();
+                            break;
+                        case "100":
+                            userManager.hashUsers();
+                            break;
+                        case "101":
+                            userManager.countNames(scanner);
+                            break;
+                        case "102":
+                            userManager.doubleArrayList();
+                            break;
+                        case "103":
+                            userManager.arrangeByLength();
                             break;
                         default:
                             System.out.println("Invalid option");
